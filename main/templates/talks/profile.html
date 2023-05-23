@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="profile_body">
+  <div class="header__wrapper">
+    <header></header>
+    <div class="cols__container">
+      <div class="left__col">
+        <div class="img__container">
+          {% if talk.user.person.profile_picture %}
+          <img
+            src="{{ talk.user.person.profile_picture.url }}"
+            width="50"
+            height="50"
+            class="rounded-circle"
+            alt="{{ person.user.username }}"
+          />
+
+          {% else %}
+          <img src="{% static 'main/media/Image.png'%}" />
+          {% endif %}
+
+          <span></span>
+        </div>
+        <h2>{{person.user}}</h2>
+        <p>{{person.bio}}</p>
+        <ul class="about" id="abouting">
+          <li><span>{{person.total_followers}}</span>Followers</li>
+          <li><span>{{person.total_following}}</span>Following</li>
+          <li><span>1</span>Talk</li>
+        </ul>
+        <h3>Followers</h3>
+        {% for follower in person.followers.all%}
+        <a href="{% url 'person' follower.user.id%}">@{{follower.user}}</a>
+        {%endfor%}
+        <br />
+        <h3>Following</h3>
+        {% for follower in person.followed_by.all%}
+        <a href="{% url 'person' follower.user.id%}">@{{follower.user}}</a>
+        {%endfor%}
+        <div class="content">
+          <h2>My Talks</h2>
+          {% for talk in talks%}
+          <p>{{talk.body}}</p>
+          {%endfor%}
+        </div>
+        <button class="sidebar__tweet">
+          <a
+            href="{% url 'update-profile' request.user.id%}"
+            style="text-decoration: none; color: white"
+            >Update Profile</a
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

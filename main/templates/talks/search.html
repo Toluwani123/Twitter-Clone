@@ -1,0 +1,11 @@
+<h1>Search Results</h1>
+
+{% if search_results %}
+  <ul>
+    {% for talk in search_results %}
+      <li>{{ talk.body }} <h3>By<a href="{% url 'person' talk.user.id%}">@{{talk.user}}</a></h3></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No results found.</p>
+{% endif %}

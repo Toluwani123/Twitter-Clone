@@ -1,0 +1,35 @@
+<h1>{{prof.user.username}}</h1>
+<h2>{{prof.bio}}</h2>
+<form method = "POST">
+    {%csrf_token%}
+    {%if prof in person.followers.all%}
+            <button name='follow' value='unfollow'>Unfollow @{{prof.user}}</button>
+    {%else%}
+        <button name = 'follow' value='follow'>Follow @{{prof.user}}</button>
+    {%endif%}
+</form>
+<ul>
+    {% for talk in talks%}
+    <li>{{talk.body}}</li>
+    {%endfor%}
+    <h3>Following</h3>
+    <form method="POST">
+        {%csrf_token%}
+        {% for follower in prof.followers.all%}
+        <a href="{% url 'person' follower.user.id%}">@{{follower.user}}</a>
+        
+        {%endfor%}
+    </form>
+    <h3>Followed By</h3>
+    {% for follower in prof.followed_by.all%}
+        <a href="{% url 'person' follower.user.id%}">@{{follower.user}}</a>
+        
+    {%endfor%}
+
+
+    <form method="POST">
+        {%csrf_token%}
+        
+           
+    </form>
+</ul>

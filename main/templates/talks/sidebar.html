@@ -1,0 +1,28 @@
+{%load static%}
+
+<div class="sidebar">
+  <i class="fab fa-twitter"></i>
+  <div class="sidebarOption active">
+    <span class="material-symbols-rounded"> home </span>
+    <a href="{% url 'home'%}" style="text-decoration: none; color: black"
+      ><h2>Home</h2></a
+    >
+  </div>
+  <div class="sidebarOption">
+    <span class="material-symbols-rounded"> search </span>
+    <h2>Search</h2>
+  </div>
+  <div class="sidebarOption">
+    <span class="material-symbols-rounded"> person </span>
+    <a
+      href="{% url 'profile' request.user.id%}"
+      style="text-decoration: none; color: black"
+      ><h2>Profile</h2></a
+    >
+  </div>
+  <button class="sidebar__tweet">
+    <a href="{% url 'talk'%}" style="text-decoration: none; color: white"
+      >Tweet
+    </a>
+  </button>
+</div>
